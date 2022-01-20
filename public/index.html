@@ -7,13 +7,107 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Too much fun for binge watchers!"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>React App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab:wght@100;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet"> 
+    <title>Binge Watcher's Twitter</title>
+
+    <style>
+      :root {
+        --my-red : #F02D3A;
+        --my-blue: #85E0FF;
+        --my-green: #37FF8B;
+        --my-yellow: #FFF15C;
+        --my-purple: #7B1BF7;
+        --header-white: #fafafa;
+        --header-font: 'Pacifico';
+        --body-font: 'Roboto', sans-serif;
+        --my-white: #ffffff;
+        --my-black: #000000;
+        --divider-color: #d7d7d7;
+    } 
+    body {
+        font-family: var(--body-font) !important; 
+    }
+    .header-divider {
+        margin: 0%;
+        padding: 0;
+        background-color: var(--divider-color);
+        height: 1px;
+        width: 100%;
+    }
+
+    .dropdown-toggle::after {
+        content: none;
+    }
+
+    .main-dropdown li .dropdown-item:hover {
+        background-image: none;
+        background-color: var(--my-red);
+        color: var(--my-white);
+    }
+
+    .logo-img {
+      margin: 5% 0% 5% 10%;
+      height: 50%;
+      width: 80%;
+    }
+
+    .form-cart {
+      background-color: var(--header-white);
+      margin: 5% 15% 5% 0%;
+    }
+
+    #loginBtn, #signupBtn {
+      color: var(--header-white);
+      border-color: var(--my-red) !important;
+    }
+
+    #loginBtn {
+      background-color: var(--my-red);
+    }
+
+    #signupBtn {
+      color: var(--my-black);
+      background-color: var(--my-white);
+    }
+
+    .footer {
+      background-color: var(--my-black);
+      color: var(--my-white);
+    }
+    .footer li {
+      background-color: var(--my-black);
+      color: var(--my-white);
+    }
+
+    .modal-auth-btn {
+      background-color: var(--my-red);
+      color: var(--header-white);
+      border-color: var(--my-red) !important;
+    }
+
+    .modal-auth-close-btn {
+      color: var(--my-black);
+      background-color: var(--my-white);
+      border-color: var(--my-red) !important;
+    }
+    
+    .tweet-box {
+      border-radius: 25px !important;
+    }
+
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
