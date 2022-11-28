@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './componenets/Landing';
 import Header from './componenets/Header';
@@ -13,26 +13,26 @@ const navLinks = [
     name: 'Home',
     link: '/',
     beforeLogin: true,
-    afterLogin: true
+    afterLogin: true,
   },
   {
     name: 'Trending',
     link: '/trending',
     beforeLogin: true,
-    afterLogin: true
+    afterLogin: true,
   },
   {
     name: 'Login / Register',
     link: '/auth',
     beforeLogin: true,
-    afterLogin: false
+    afterLogin: false,
   },
   {
     name: 'Logout',
     link: '/logout',
     beforeLogin: false,
-    afterLogin: true
-  }
+    afterLogin: true,
+  },
 ];
 
 function App() {
@@ -41,18 +41,31 @@ function App() {
   const verifyLogin = async (email, password) => {
     const res = auth.authenticate(email, password);
     return res;
-  }
+  };
 
   return (
     <Router>
       <>
-        <Header brandName="Binge Watcher's Twitter" isLoggedIn={isLoggedIn} navs={navLinks} />
-          <Routes>
-            <Route path="/" element={<TweetGrid />} />
-            <Route path="/trending" element={<Grid />} />
-            <Route path="/auth" element={<Landing loginVerifier={verifyLogin} loginCallback={setLogIn} isLoggedIn={isLoggedIn} />} />
-            <Route path="/logout" element={<Logout loginCallback={setLogIn} />} />
-          </Routes>
+        <Header
+          brandName="Binge Watcher's Twitter"
+          isLoggedIn={isLoggedIn}
+          navs={navLinks}
+        />
+        <Routes>
+          <Route path="/" element={<TweetGrid />} />
+          <Route path="/trending" element={<Grid />} />
+          <Route
+            path="/auth"
+            element={
+              <Landing
+                loginVerifier={verifyLogin}
+                loginCallback={setLogIn}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          />
+          <Route path="/logout" element={<Logout loginCallback={setLogIn} />} />
+        </Routes>
         <Footer />
       </>
     </Router>

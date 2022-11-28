@@ -15,7 +15,8 @@ export default function LoginModal (props) {
             alert("Successfully logged In");
             document.querySelector('#loginModal .modal-auth-close-btn').click();
         }
-        props.loginCallback(res);
+        props.loginCallback(res); // setLogIn(true)
+        console.log(res);
         res && navigate('/trending');
     };
 
