@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from './componenets/Landing';
 import Header from './componenets/Header';
@@ -7,6 +7,7 @@ import Grid from './componenets/Grid';
 import TweetGrid from './componenets/TweetGrid';
 import Logout from './componenets/Logout';
 import auth from './apis/auth';
+import Dashboard from './componenets/Dashboard';
 
 const navLinks = [
   {
@@ -28,6 +29,12 @@ const navLinks = [
     afterLogin: false,
   },
   {
+    name: 'Dashboard',
+    link: '/dashboard',
+    beforeLogin: false,
+    afterLogin: true,
+  },
+  {
     name: 'Logout',
     link: '/logout',
     beforeLogin: false,
@@ -42,6 +49,12 @@ function App() {
     const res = auth.authenticate(email, password);
     return res;
   };
+
+  useEffect(() => {
+    if (sessionStorage.getItem('AuthToken')) {
+      setLogIn(true);
+    }
+  }, []);
 
   return (
     <Router>
@@ -64,6 +77,7 @@ function App() {
               />
             }
           />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/logout" element={<Logout loginCallback={setLogIn} />} />
         </Routes>
         <Footer />

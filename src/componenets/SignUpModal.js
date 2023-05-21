@@ -6,11 +6,23 @@ export default function SignUpModal(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const singupVerifier = () => {
-    if (auth.signup(name, email, password)) {
-      alert('Signed Up Successfully');
-      document.querySelector('#signupModal .modal-auth-close-btn').click();
-    }
+  const resetFields = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
+
+  const singupVerifier = async () => {
+    auth
+      .signup(name, email, password)
+      .then(async (res) => {
+        alert('Signed Up Successfully');
+        document.querySelector('#signupModal .modal-auth-close-btn').click();
+        resetFields();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   const handleOnChage = (ev) => {
@@ -56,6 +68,7 @@ export default function SignUpModal(props) {
                   onChange={handleOnChage}
                   className="form-control"
                   id="signupName"
+                  value={name}
                 />
               </div>
               <div className="mb-3">
@@ -68,6 +81,7 @@ export default function SignUpModal(props) {
                   onChange={handleOnChage}
                   className="form-control"
                   id="signupEmail"
+                  value={email}
                 />
               </div>
               <div className="mb-3">
@@ -80,6 +94,7 @@ export default function SignUpModal(props) {
                   onChange={handleOnChage}
                   className="form-control"
                   id="signupPassword"
+                  value={password}
                 />
               </div>
             </form>

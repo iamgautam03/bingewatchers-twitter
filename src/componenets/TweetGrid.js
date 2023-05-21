@@ -28,7 +28,7 @@ export default function TweetGrid() {
   return (
     <div className="container">
       <div className="row my-5 mx-1">
-        <h3 className="text-center">Recent Tweets</h3>
+        <h3 className="text-center">See What's Happening Around</h3>
         <Tweet tweets={tweets} />
       </div>
     </div>
