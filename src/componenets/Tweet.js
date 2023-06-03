@@ -1,4 +1,5 @@
 import React from 'react';
+import auth from '../apis/auth';
 
 export default function Tweet(props) {
   return props.tweets.map((tweet, index) => {
@@ -11,17 +12,19 @@ export default function Tweet(props) {
           <div>
             <img
               className="rounded-circle"
-              src={`https://avatars.dicebear.com/api/initials/${tweet.name}.svg`}
+              src={`https://avatars.dicebear.com/api/initials/${tweet.tweetBy}.svg`}
               alt="avater-alt"
               height="48px"
               width="48px"
             />
           </div>
           <div>
-            <span className="fw-bold ms-2">{tweet.name}</span>
+            <span className="fw-bold ms-2">{tweet.tweetBy}</span>
             <br />
             <span className="text-muted ms-2 fw-light">
-              <small>Posted On {tweet.postedOn}</small>
+              <small>
+                Posted On {new Date(tweet.createdOn).toLocaleString()}
+              </small>
             </span>
           </div>
         </div>

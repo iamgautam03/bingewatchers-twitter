@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { tweetsAPI } from '../apis/tweet';
+import auth from '../apis/auth';
 export default function PostTweet() {
+  const username = auth.getUser().name;
   const [tweet, setTweet] = useState('');
   const handleClear = () => {
     document.getElementById('tweetbox').value = '';
@@ -8,8 +11,11 @@ export default function PostTweet() {
   const handleTweetTyping = () => {
     setTweet(document.getElementById('tweetbox').value);
   };
-  const handlePostTweet = () => {
-    console.log(tweet);
+  const handlePostTweet = async () => {
+    let user = auth.getUser();
+    await tweetsAPI.add(user.id, user.name, tweet);
+    alert('Tweet posted succesfully');
+    setTweet('');
   };
   return (
     <div className="container">
@@ -25,14 +31,14 @@ export default function PostTweet() {
             <div>
               <img
                 className="rounded-circle"
-                src={`https://avatars.dicebear.com/api/initials/${'Gautam Patel'}.svg`}
+                src={`https://avatars.dicebear.com/api/initials/${username}.svg`}
                 alt="avater-alt"
                 height="48px"
                 width="48px"
               />
             </div>
             <div>
-              <span className="fw-bold ms-2">Gautam Patel</span>
+              <span className="fw-bold ms-2">{username}</span>
               <br />
               <span className="text-muted ms-2 fw-light">
                 <small>Tweet Something Now</small>

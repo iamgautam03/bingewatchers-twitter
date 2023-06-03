@@ -13,7 +13,6 @@ export default function LoginModal(props) {
       .then((res) => {
         alert('Successfully logged In');
         document.querySelector('#loginModal .modal-auth-close-btn').click();
-        console.log(sessionStorage.getItem('AuthToken'));
         props.loginCallback(true);
         navigate('/dashboard');
       })

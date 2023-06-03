@@ -41,6 +41,10 @@ const auth = {
     sessionStorage.removeItem('AuthToken');
     sessionStorage.removeItem('User');
   },
+  getUser: () => {
+    const user = JSON.parse(sessionStorage.getItem('User'));
+    return user;
+  },
 };
 
 export default auth;
