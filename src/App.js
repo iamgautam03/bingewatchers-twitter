@@ -64,22 +64,27 @@ function App() {
           isLoggedIn={isLoggedIn}
           navs={navLinks}
         />
-        <Routes>
-          <Route path="/" element={<TrendingTweets />} />
-          <Route path="/trending" element={<Grid />} />
-          <Route
-            path="/auth"
-            element={
-              <Landing
-                loginVerifier={verifyLogin}
-                loginCallback={setLogIn}
-                isLoggedIn={isLoggedIn}
-              />
-            }
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/logout" element={<Logout loginCallback={setLogIn} />} />
-        </Routes>
+        <div style={{ minHeight: '80vh' }}>
+          <Routes>
+            <Route path="/" element={<TrendingTweets />} />
+            <Route path="/trending" element={<Grid />} />
+            <Route
+              path="/auth"
+              element={
+                <Landing
+                  loginVerifier={verifyLogin}
+                  loginCallback={setLogIn}
+                  isLoggedIn={isLoggedIn}
+                />
+              }
+            />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/logout"
+              element={<Logout loginCallback={setLogIn} />}
+            />
+          </Routes>
+        </div>
         <Footer />
       </>
     </Router>

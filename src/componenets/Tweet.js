@@ -10,6 +10,18 @@ export default function Tweet(props) {
       await tweetsAPI.remove(tweet.id);
     }
   };
+  if (props.tweets.length === 0) {
+    return (
+      <div className="col-12 col-lg-10 col-xl-8 col-xxl-6 offset-lg-1 offset-xl-2 offset-xxl-3 p-1 my-5">
+        <div
+          style={{ fontFamily: 'var(--header-font)', color: 'var(--my-red)' }}
+          className="display-1 text-center"
+        >
+          Be the first to tweet!
+        </div>
+      </div>
+    );
+  }
   return props.tweets.map((tweet, index) => {
     return (
       <div
