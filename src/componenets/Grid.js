@@ -8,7 +8,6 @@ export default function Grid(props) {
   useEffect(() => {
     const getTrendingMovies = async () => {
       const trendingMovies = await getTrending();
-      console.log(trendingMovies);
       setGridItems(trendingMovies.results);
     };
     getTrendingMovies();

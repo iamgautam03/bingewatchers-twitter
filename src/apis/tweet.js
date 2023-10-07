@@ -10,16 +10,18 @@ import {
   getDocs,
   orderBy,
   limit,
+  deleteDoc,
 } from 'firebase/firestore';
 
 export const tweetsAPI = {
-  add: async (id, name, tweetDescription) => {
+  add: async (userId, name, tweetDescription) => {
     await addDoc(collection(db, 'tweets'), {
       tweet: tweetDescription,
       createdOn: new Date().getTime(),
       likes: 0,
-      createdBy: id,
+      createdBy: userId,
       tweetBy: name,
+      likedBy: [],
     });
   },
   get: async (tweetId) => {
@@ -27,29 +29,38 @@ export const tweetsAPI = {
     if (tweet.exists()) return tweet.data();
     else throw new Error(`No Tweets Exists with id: ${tweetId}`);
   },
-  increaseLikes: async (tweetId, noOfLikes) => {
+  increaseLikes: async (likedBy, tweetId, noOfLikes) => {
     const tweetRef = doc(db, 'tweets', tweetId);
+    const tweet = (await getDoc(tweetRef)).data();
+    tweet.likedBy.push(likedBy);
     await updateDoc(tweetRef, {
-      likes: db.firestore.FieldValue.increment(noOfLikes),
+      likes: tweet.likes + noOfLikes,
+      likedBy: tweet.likedBy,
     });
   },
-  decreaseLike: async (tweetId) => {
-    const tweet = this.get(tweetId);
+  decreaseLike: async (disLikedBy, tweetId) => {
     const tweetRef = doc(db, 'tweets', tweetId);
+    const tweet = (await getDoc(tweetRef)).data();
+    const likedBy = tweet.likedBy;
+    let indx = likedBy.findIndex((e) => e === disLikedBy);
+    likedBy.splice(indx, 1);
     await updateDoc(tweetRef, {
-      likes: Math.max(tweet.data.likes - 1, 0),
+      likes: Math.max(tweet.likes - 1, 0),
+      likedBy: likedBy,
     });
   },
-  getAllTweets: async (userId) => {
+  getAllTweets: async (createdBy) => {
     const tweetsRef = collection(db, 'tweets');
-    const queryStmt = query(tweetsRef, where('createdBy', '==', userId));
+    const queryStmt = query(tweetsRef, where('createdBy', '==', createdBy));
 
     const resultSet = await getDocs(queryStmt);
     const tweets = [];
-    resultSet.forEach((tweet) => {
-      tweets.push(tweet.data());
+    resultSet.forEach(async (tweet) => {
+      tweets.push({
+        ...tweet.data(),
+        id: tweet.id,
+      });
     });
-
     return tweets;
   },
   getTrendingTweets: async () => {
@@ -58,10 +69,16 @@ export const tweetsAPI = {
 
     const resultSet = await getDocs(queryStmt);
     const tweets = [];
-    resultSet.forEach((tweet) => {
-      tweets.push(tweet.data());
+    resultSet.forEach(async (tweet) => {
+      tweets.push({
+        ...tweet.data(),
+        id: tweet.id,
+      });
     });
-
     return tweets;
+  },
+  remove: async (tweetId) => {
+    const tweetRef = doc(db, 'tweets', tweetId);
+    await deleteDoc(tweetRef);
   },
 };

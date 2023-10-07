@@ -1,22 +1,5 @@
-import React, { useState } from 'react';
-import { tweetsAPI } from '../apis/tweet';
-import auth from '../apis/auth';
-export default function PostTweet() {
-  const username = auth.getUser().name;
-  const [tweet, setTweet] = useState('');
-  const handleClear = () => {
-    document.getElementById('tweetbox').value = '';
-    setTweet('');
-  };
-  const handleTweetTyping = () => {
-    setTweet(document.getElementById('tweetbox').value);
-  };
-  const handlePostTweet = async () => {
-    let user = auth.getUser();
-    await tweetsAPI.add(user.id, user.name, tweet);
-    alert('Tweet posted succesfully');
-    setTweet('');
-  };
+import React from 'react';
+export default function PostTweet(props) {
   return (
     <div className="container">
       <div className="row my-5 mx-1">
@@ -31,14 +14,14 @@ export default function PostTweet() {
             <div>
               <img
                 className="rounded-circle"
-                src={`https://avatars.dicebear.com/api/initials/${username}.svg`}
+                src={`https://api.dicebear.com/7.x/initials/svg?seed=${props.username}`}
                 alt="avater-alt"
                 height="48px"
                 width="48px"
               />
             </div>
             <div>
-              <span className="fw-bold ms-2">{username}</span>
+              <span className="fw-bold ms-2">{props.username}</span>
               <br />
               <span className="text-muted ms-2 fw-light">
                 <small>Tweet Something Now</small>
@@ -51,18 +34,21 @@ export default function PostTweet() {
               id="tweetbox"
               rows="6"
               placeholder="Start Tweeting"
-              onChange={handleTweetTyping}
-              value={tweet}
+              onChange={props.handleTweetTyping}
+              value={props.tweet}
             ></textarea>
           </div>
           <div className="d-flex justify-content-end mx-2 mb-3">
             <button
               className="btn btn-lg btn-primary me-2"
-              onClick={handlePostTweet}
+              onClick={props.handlePostTweet}
             >
               Tweet
             </button>
-            <button className="btn btn-lg btn-secondary" onClick={handleClear}>
+            <button
+              className="btn btn-lg btn-secondary"
+              onClick={props.handleClear}
+            >
               Clear
             </button>
           </div>

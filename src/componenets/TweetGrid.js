@@ -25,7 +25,7 @@ export default function TweetGrid() {
         <h3 className="text-center">
           {user ? 'Your Tweets' : "See What's Happening Around"}
         </h3>
-        <Tweet tweets={tweets} />
+        <Tweet tweets={tweets} tweetOwner={user} />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Landing from './componenets/Landing';
 import Header from './componenets/Header';
 import Footer from './componenets/Footer';
 import Grid from './componenets/Grid';
-import TweetGrid from './componenets/TweetGrid';
+import TrendingTweets from './componenets/TrendingTweets';
 import Logout from './componenets/Logout';
 import auth from './apis/auth';
 import Dashboard from './componenets/Dashboard';
@@ -65,7 +65,7 @@ function App() {
           navs={navLinks}
         />
         <Routes>
-          <Route path="/" element={<TweetGrid />} />
+          <Route path="/" element={<TrendingTweets />} />
           <Route path="/trending" element={<Grid />} />
           <Route
             path="/auth"

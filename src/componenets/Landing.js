@@ -21,7 +21,7 @@ export default function Landing(props) {
             className="display-3 text-lg-left text-center mb-3 mb-lg-5"
             style={{ fontFamily: 'var(--header-font)' }}
           >
-            Just One More Episode Please!
+            Just One More Movie Please!
           </h2>
           <div className="row justify-content-center align-items-center">
             <div className="col col-sm-10 col-md-8 col-lg-6">

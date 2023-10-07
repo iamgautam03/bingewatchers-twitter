@@ -11,13 +11,16 @@ export default function LoginModal(props) {
     auth
       .authenticate(email, password)
       .then((res) => {
-        alert('Successfully logged In');
+        window.showSnackbar('Successfully logged In', 'alert-success');
         document.querySelector('#loginModal .modal-auth-close-btn').click();
         props.loginCallback(true);
         navigate('/dashboard');
       })
       .catch((err) => {
-        alert(err.message);
+        window.showSnackbar(
+          'Incorret email and password combination, please try again.',
+          'alert-danger'
+        );
       });
   };
 

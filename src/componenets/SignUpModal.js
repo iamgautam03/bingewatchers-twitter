@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import auth from '../apis/auth';
 
+const firebaseErros = {
+  'Firebase: Error (auth/email-already-in-use).':
+    'Email Already Exists, please use different email or login.',
+};
+
 export default function SignUpModal(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,12 +21,17 @@ export default function SignUpModal(props) {
     auth
       .signup(name, email, password)
       .then(async (res) => {
-        alert('Signed Up Successfully');
+        window.showSnackbar('Signed Up Successfully', 'alert-success');
         document.querySelector('#signupModal .modal-auth-close-btn').click();
         resetFields();
       })
       .catch((err) => {
-        alert(err.message);
+        console.log(err.message);
+        window.showSnackbar(
+          firebaseErros[err.message] ||
+            "Something wen't wrong please try again.",
+          'alert-danger'
+        );
       });
   };
 
