@@ -103,11 +103,51 @@
       border-radius: 25px !important;
     }
 
+    .snackbar {
+      position: fixed;
+      top: 10%;
+      left: 30%;
+      width: 40%;
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+      z-index: 99999;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .active {
+      opacity: 1;
+    }
+
     </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="snackbar">
+      <div id="snackbar-alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div id="snackbar-msg">
+          <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        </div>
+      </div>
+    </div>
     <div id="root"></div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script>
+    const snackbar = document.querySelector('.snackbar');
+    const snackbarType = document.querySelector('#snackbar-alert');
+
+    const showSnackbar = (message, type) => {
+      snackbar.querySelector('#snackbar-msg').innerText = message;
+      snackbar.classList.add('active');
+      snackbarType.className = "";
+      snackbarType.classList.add('alert', type, 'alert-dismissible', 'fade', 'show');
+
+      setTimeout(() => {
+        snackbar.classList.remove('active');
+      }, 5000);
+    };
+
+    window.showSnackbar = showSnackbar;
+  </script>
 </html>
