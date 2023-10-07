@@ -28,13 +28,12 @@ const auth = {
         password
       );
     };
-    createAndGetUser(email, password)
+    await createAndGetUser(email, password)
       .then(async (res) => {
-        console.log(`res: ${JSON.stringify(res)}`);
         await usersAPI.add(name, email, res.user.uid);
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   },
   logout: () => {
